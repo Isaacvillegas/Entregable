@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Salud - Reportes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-clinic-medical"></i>
+                <h2>Nova Salud</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard.html"><i class="fas fa-home"></i> Inicio</a>
+                </li>
+                <li>
+                    <a href="inventory.html"><i class="fas fa-boxes"></i> Inventario</a>
+                </li>
+                <li>
+                    <a href="sales.html"><i class="fas fa-shopping-cart"></i> Ventas</a>
+                </li>
+                <li class="active">
+                    <a href="reports.html"><i class="fas fa-chart-bar"></i> Reportes</a>
+                </li>
+                <li class="sidebar-footer">
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="top-header">
+                <div class="toggle-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="user-menu">
+                    <span id="currentDate"></span>
+                    <div class="user-profile">
+                        <span>Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Reports Content -->
+            <div class="reports-content">
+                <h1>Reportes y Estadísticas</h1>
+                
+                <div class="report-filters">
+                    <div class="filter-group">
+                        <label for="reportStartDate">Desde:</label>
+                        <input type="date" id="reportStartDate">
+                    </div>
+                    <div class="filter-group">
+                        <label for="reportEndDate">Hasta:</label>
+                        <input type="date" id="reportEndDate">
+                    </div>
+                    <button id="generateReportBtn" class="btn-primary"><i class="fas fa-sync"></i> Generar</button>
+                    <button id="exportReportBtn" class="btn-secondary"><i class="fas fa-file-export"></i> Exportar</button>
+                </div>
+                
+                <div class="reports-container">
+                    <!-- Sales Summary Chart -->
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h2>Resumen de Ventas</h2>
+                            <div class="report-options">
+                                <select id="salesChartPeriod">
+                                    <option value="daily">Diario</option>
+                                    <option value="weekly">Semanal</option>
+                                    <option value="monthly" selected>Mensual</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="salesChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Top Products Chart -->
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h2>Productos Más Vendidos</h2>
+                            <div class="report-options">
+                                <select id="topProductsLimit">
+                                    <option value="5">Top 5</option>
+                                    <option value="10" selected>Top 10</option>
+                                    <option value="15">Top 15</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="topProductsChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Inventory Status Chart -->
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h2>Estado de Inventario</h2>
+                            <div class="report-options">
+                                <select id="inventoryChartType">
+                                    <option value="category">Por Categoría</option>
+                                    <option value="status">Por Estado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="inventoryChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- Sales by Category Chart -->
+                    <div class="report-card">
+                        <div class="report-header">
+                            <h2>Ventas por Categoría</h2>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="salesByCategoryChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reports-tables">
+                    <div class="report-card full-width">
+                        <div class="report-header">
+                            <h2>Detalle de Ventas</h2>
+                            <div class="report-options">
+                                <input type="text" id="salesTableSearch" placeholder="Buscar...">
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table" id="salesReportTable">
+                                <thead>
+                                    <tr>
+                                        <th>Venta #</th>
+                                        <th>Fecha</th>
+                                        <th>Cliente</th>
+                                        <th>Doc. Cliente</th>
+                                        <th>Items</th>
+                                        <th>Subtotal</th>
+                                        <th>IGV</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data will be inserted here by JavaScript -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" class="text-right"><strong>Totales:</strong></td>
+                                        <td id="totalSubtotal">S/. 0.00</td>
+                                        <td id="totalTax">S/. 0.00</td>
+                                        <td id="reportTotal">S/. 0.00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="pagination">
+                            <button id="prevReportPage" class="btn-secondary"><i class="fas fa-chevron-left"></i> Anterior</button>
+                            <span id="currentReportPage">Página 1 de 1</span>
+                            <button id="nextReportPage" class="btn-secondary">Siguiente <i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="database.js"></script>
+    <script src="reports.js"></script>
+</body>
+</html>

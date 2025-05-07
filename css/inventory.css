@@ -1,0 +1,150 @@
+/* Inventory Styles */
+.inventory-content {
+    padding: 1.5rem;
+}
+
+.inventory-content h1 {
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+/* Inventory Actions */
+.inventory-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 0.6rem;
+    border: 1px solid #d1d3e2;
+    border-right: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.search-box button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0.6rem 1rem;
+}
+
+.filter-box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-box select {
+    padding: 0.6rem;
+    border: 1px solid #d1d3e2;
+    border-radius: 4px;
+    min-width: 170px;
+}
+
+/* Inventory Table */
+.inventory-table {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.inventory-table .data-table th:last-child,
+.inventory-table .data-table td:last-child {
+    text-align: center;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    min-width: 80px;
+}
+
+.status-normal {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.status-low {
+    background-color: var(--warning-color);
+    color: var(--dark-color);
+}
+
+.status-out {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.action-buttons button {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.875rem;
+}
+
+/* Expiry Warning */
+.expiry-warning {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+/* Product Form */
+#productForm textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .inventory-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-box {
+        max-width: 100%;
+    }
+    
+    .filter-box {
+        flex-wrap: wrap;
+    }
+    
+    .filter-box select {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .inventory-table {
+        overflow-x: auto;
+    }
+    
+    .data-table {
+        min-width: 800px;
+    }
+}

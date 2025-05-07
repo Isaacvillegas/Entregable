@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Salud - Registro de Ventas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/sales.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-clinic-medical"></i>
+                <h2>Nova Salud</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard.html"><i class="fas fa-home"></i> Inicio</a>
+                </li>
+                <li>
+                    <a href="inventory.html"><i class="fas fa-boxes"></i> Inventario</a>
+                </li>
+                <li class="active">
+                    <a href="sales.html"><i class="fas fa-shopping-cart"></i> Ventas</a>
+                </li>
+                <li>
+                    <a href="reports.html"><i class="fas fa-chart-bar"></i> Reportes</a>
+                </li>
+                <li class="sidebar-footer">
+                    <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <header class="top-header">
+                <div class="toggle-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="user-menu">
+                    <span id="currentDate"></span>
+                    <div class="user-profile">
+                        <span>Admin</span>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Sales Content -->
+            <div class="sales-content">
+                <h1>Registro de Ventas</h1>
+                
+                <div class="sales-container">
+                    <!-- Left panel: New Sale -->
+                    <div class="new-sale-panel">
+                        <div class="panel-header">
+                            <h2>Nueva Venta</h2>
+                            <span id="saleNumber">Venta #001</span>
+                        </div>
+                        
+                        <div class="customer-info">
+                            <h3>Información del Cliente</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="customerType">Tipo de Documento</label>
+                                    <select id="customerType">
+                                        <option value="dni">DNI</option>
+                                        <option value="ruc">RUC</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customerId">Número</label>
+                                    <input type="text" id="customerId" placeholder="Ingrese número">
+                                </div>
+                                <button id="searchCustomerBtn" class="btn-secondary"><i class="fas fa-search"></i></button>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="customerName">Nombre/Razón Social</label>
+                                    <input type="text" id="customerName" placeholder="Ingrese nombre">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-search">
+                            <h3>Buscar Producto</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="productSearchCode">Código/Nombre</label>
+                                    <input type="text" id="productSearchCode" placeholder="Ingrese código o nombre">
+                                </div>
+                                <button id="searchProductBtn" class="btn-secondary"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-results" id="productResults">
+                            <!-- Search results will be displayed here -->
+                        </div>
+                        
+                        <div class="sale-items">
+                            <h3>Detalle de Venta</h3>
+                            <table class="data-table" id="saleItemsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Producto</th>
+                                        <th>Precio Unit.</th>
+                                        <th>Cantidad</th>
+                                        <th>Total</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Sale items will be inserted here by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="sale-summary">
+                            <div class="summary-item">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">S/. 0.00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>IGV (18%):</span>
+                                <span id="tax">S/. 0.00</span>
+                            </div>
+                            <div class="summary-item total">
+                                <span>Total:</span>
+                                <span id="total">S/. 0.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="sale-actions">
+                            <button id="cancelSaleBtn" class="btn-secondary"><i class="fas fa-times"></i> Cancelar</button>
+                            <button id="completeSaleBtn" class="btn-primary"><i class="fas fa-check"></i> Finalizar Venta</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Right panel: Sales History -->
+                    <div class="sales-history-panel">
+                        <div class="panel-header">
+                            <h2>Historial de Ventas</h2>
+                            <div class="date-filter">
+                                <label for="salesDateFilter">Fecha:</label>
+                                <input type="date" id="salesDateFilter" value="">
+                            </div>
+                        </div>
+                        
+                        <div class="sales-list">
+                            <table class="data-table" id="salesHistoryTable">
+                                <thead>
+                                    <tr>
+                                        <th>Venta #</th>
+                                        <th>Fecha</th>
+                                        <th>Cliente</th>
+                                        <th>Total</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Sales history will be inserted here by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sale Receipt Modal -->
+            <div id="receiptModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Comprobante de Venta</h2>
+                        <span class="close-modal">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="receipt" id="receiptContent">
+                            <div class="receipt-header">
+                                <h2>Nova Salud</h2>
+                                <p>Av. Principal 123, Ciudad</p>
+                                <p>RUC: 20123456789</p>
+                                <p>Tel: (01) 234-5678</p>
+                            </div>
+                            <div class="receipt-info">
+                                <p><strong>Venta #:</strong> <span id="receiptNumber"></span></p>
+                                <p><strong>Fecha:</strong> <span id="receiptDate"></span></p>
+                                <p><strong>Cliente:</strong> <span id="receiptCustomer"></span></p>
+                                <p><strong>Doc:</strong> <span id="receiptCustomerId"></span></p>
+                            </div>
+                            <table class="receipt-items">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Cant.</th>
+                                        <th>Precio</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="receiptItems">
+                                    <!-- Receipt items will be inserted here by JavaScript -->
+                                </tbody>
+                            </table>
+                            <div class="receipt-summary">
+                                <p><strong>Subtotal:</strong> <span id="receiptSubtotal"></span></p>
+                                <p><strong>IGV (18%):</strong> <span id="receiptTax"></span></p>
+                                <p class="receipt-total"><strong>Total:</strong> <span id="receiptTotal"></span></p>
+                            </div>
+                            <div class="receipt-footer">
+                                <p>¡Gracias por su compra!</p>
+                            </div>
+                        </div>
+                        <div class="receipt-actions">
+                            <button id="printReceiptBtn" class="btn-primary"><i class="fas fa-print"></i> Imprimir</button>
+                            <button id="closeReceiptBtn" class="btn-secondary">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="database.js"></script>
+    <script src="sales.js"></script>
+</body>
+</html>
